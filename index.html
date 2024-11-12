@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi-Page Website</title>
+  <style>
+    /* Basic Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      text-align: center;
+    }
+
+    header,
+    footer {
+      background-color: #333;
+      color: #fff;
+      padding: 1em;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    nav {
+      margin: 10px 0;
+    }
+
+    nav a {
+      color: #333;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #555;
+    }
+
+    #content {
+      margin: 20px;
+      padding: 20px;
+      background-color: #fff;
+      text-align: left;
+    }
+
+    footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 10px;
+    }
+
+    .footer-links {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+
+    .footer-links a:hover {
+      color: #fff;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 0.9em;
+      color: #ccc;
+    }
+  </style>
+  <script>
+    // JavaScript to handle page content loading
+    function loadPage(page) {
+      const content = document.getElementById('content');
+
+      // Clear previous content
+      content.innerHTML = '';
+
+      // Load new content based on the page argument
+      if (page === 'home') {
+        content.innerHTML = `
+            <h2>Welcome to the Home Page</h2>
+            <p>Rhode Island Detective Agency aims to bring justice to the public. Our agency was founded by Rowan L. Pan on May 1st, 2009. We stop at nothing to ensure that our top detectives solve every case, every time.</p>
+            <img src="RIDA.png" alt="Home Image">
+        `;
+      } else if (page === 'about') {
+        content.innerHTML = `
+            <h2>About Us</h2>
+            <p>Learn more about our website and the team behind it.</p>
+            <img src="RIDA.png" alt="About Image">
+        `;
+      } else if (page === 'contact') {
+        content.innerHTML = `
+            <h2>Contact Us</h2>
+            <p>If you have any questions, feel free to reach out at <a href="mailto:rhidacontact@gmail.com">rhidacontact@gmail.com</a>.</p>
+        `;
+      } else if (page === 'careers') {
+        loadCareers();
+      }
+    }
+
+    function loadCareers() {
+      const content = document.getElementById('content');
+      content.innerHTML = `
+        <h2>Careers at Rhode Island Detective Agency</h2>
+        <p>Join our team and help us solve the mysteries that matter. Choose a role below to apply:</p>
+        <ul>
+          <li><a href="#" onclick="loadApplicationForm('detective')">Detective</a></li>
+          <li><a href="#" onclick="loadApplicationForm('forensic-analyst')">Forensic Analyst</a></li>
+          <li><a href="#" onclick="loadApplicationForm('field-investigator')">Field Investigator</a></li>
+        </ul>
+      `;
+    }
+
+    function loadApplicationForm(job) {
+      const content = document.getElementById('content');
+      let formHtml = '';
+
+      if (job === 'detective') {
+        formHtml = `
+          <h2>Apply for Detective Position</h2>
+          <form onsubmit="submitApplication(event)">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="experience">Years of Experience in Investigation:</label><br>
+            <input type="number" id="experience" name="experience" required><br><br>
+
+            <label for="motivation">Why do you want to join RIDA as a Detective?</label><br>
+            <textarea id="motivation" name="motivation" required></textarea><br><br>
+
+            <label for="case">Describe a complex case you've solved:</label><br>
+            <textarea id="case" name="case" required></textarea><br><br>
+
+            <input type="submit" value="Submit Application">
+          </form>
+        `;
+      } else if (job === 'forensic-analyst') {
+        formHtml = `
+          <h2>Apply for Forensic Analyst Position</h2>
+          <form onsubmit="submitApplication(event)">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="lab-skills">Describe your laboratory skills and forensic techniques:</label><br>
+            <textarea id="lab-skills" name="lab-skills" required></textarea><br><br>
+
+            <label for="tools">What forensic tools are you proficient with?</label><br>
+            <textarea id="tools" name="tools" required></textarea><br><br>
+
+            <label for="availability">Are you available for on-call shifts?</label><br>
+            <input type="text" id="availability" name="availability" required><br><br>
+
+            <input type="submit" value="Submit Application">
+          </form>
+        `;
+      } else if (job === 'field-investigator') {
+        formHtml = `
+          <h2>Apply for Field Investigator Position</h2>
+          <form onsubmit="submitApplication(event)">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="surveillance">Describe your experience with surveillance:</label><br>
+            <textarea id="surveillance" name="surveillance" required></textarea><br><br>
+
+            <label for="strengths">What strengths do you bring to field investigations?</label><br>
+            <textarea id="strengths" name="strengths" required></textarea><br><br>
+
+            <label for="risk">Are you comfortable working in high-risk environments?</label><br>
+            <input type="text" id="risk" name="risk" required><br><br>
+
+            <input type="submit" value="Submit Application">
+          </form>
+        `;
+      }
+
+      content.innerHTML = formHtml;
+    }
+
+    function submitApplication(event) {
+      event.preventDefault(); // Prevent form from actually submitting
+      const content = document.getElementById('content');
+      content.innerHTML = `
+        <h2>Thank you for your application!</h2>
+        <p>We will be in contact soon if you match the criteria for this position.</p>
+      `;
+    }
+  </script>
+</head>
+
+<body onload="loadPage('home')">
+
+  <header>
+    <h1>My Simple Multi-Page Website</h1>
+    <nav>
+      <a href="#" onclick="loadPage('home')">Home</a>
+      <a href="#" onclick="loadPage('about')">About</a>
+      <a href="#" onclick="loadPage('contact')">Contact</a>
+      <a href="#" onclick="loadPage('careers')">Careers</a>
+    </nav>
+  </header>
+
+  <div id="content">
+    <!-- Dynamic content loads here -->
+  </div>
+
+  <footer>
+    <div class="footer-links">
+      <a href="#" onclick="loadPage('policy')">Policy</a>
+      <a href="#" onclick="loadPage('careers')">Careers</a>
+      <a href="#" onclick="loadPage('contact')">Contact</a>
+    </div>
+    <p>&copy; 2024. All Rights Reserved.</p>
+  </footer>
+
+</body>
+
+</html>
